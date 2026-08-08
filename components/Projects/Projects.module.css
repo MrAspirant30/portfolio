@@ -1,0 +1,347 @@
+/* ==================================
+        CHAPTER THREE
+================================== */
+
+.projects {
+
+    width: 100%;
+
+    background: var(--background);
+
+    padding-bottom: 180px;
+
+}
+
+/* ==================================
+        CHAPTER INTRO
+================================== */
+
+.chapterIntro {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 30px;
+
+}
+
+.chapterNumber {
+
+    color: var(--primary);
+
+    font-size: .85rem;
+
+    font-weight: 700;
+
+    letter-spacing: 7px;
+
+}
+
+.chapterTitle {
+
+    margin-top: 25px;
+
+    font-size: clamp(3rem, 7vw, 6rem);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    color: var(--text);
+
+}
+
+.introText {
+
+    max-width: 600px;
+
+    margin-top: 45px;
+
+    font-size: 1.25rem;
+
+    line-height: 1.8;
+
+    color: var(--text-light);
+
+}
+
+/* ==================================
+        PROJECT
+================================== */
+
+.project {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 0 30px;
+
+}
+
+/* ==================================
+        PROJECT HEADER
+================================== */
+
+.projectHeader {
+
+    display: grid;
+
+    grid-template-columns: 80px 1fr;
+
+    gap: 35px;
+
+    padding-bottom: 80px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .08);
+
+}
+
+.projectNumber {
+
+    font-size: .9rem;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--primary);
+
+    padding-top: 8px;
+
+}
+
+.status {
+
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: .7rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+}
+
+.projectHeader h3 {
+
+    margin-top: 22px;
+
+    font-size: clamp(3rem, 6vw, 5rem);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    color: var(--text);
+
+}
+
+.projectName {
+
+    margin-top: 15px;
+
+    font-size: 1.1rem;
+
+    color: var(--text-light);
+
+}
+
+/* ==================================
+        STORY BLOCK
+================================== */
+
+.storyBlock {
+
+    padding: 90px 0;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .08);
+
+}
+
+.label {
+
+    display: block;
+
+    margin-bottom: 25px;
+
+    color: var(--primary);
+
+    font-size: .75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+}
+
+.storyBlock p {
+
+    max-width: 700px;
+
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+
+    line-height: 1.8;
+
+    color: var(--text);
+
+}
+
+/* ==================================
+        NEXT
+================================== */
+
+.nextBlock {
+
+    padding: 100px 0;
+
+}
+
+.nextBlock p {
+
+    max-width: 700px;
+
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+
+    line-height: 1.8;
+
+    color: var(--text);
+
+}
+
+/* ==================================
+        ENDING
+================================== */
+
+.ending {
+
+    min-height: 70vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 100px 30px;
+
+}
+
+.ending h3 {
+
+    font-size: clamp(3rem, 6vw, 5rem);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    color: var(--text);
+
+}
+
+.ending p {
+
+    margin-top: 30px;
+
+    font-size: 1.3rem;
+
+    color: var(--text-light);
+
+}
+
+/* ==================================
+        RESPONSIVE
+================================== */
+
+@media (max-width:768px) {
+
+    .chapterTitle {
+
+        letter-spacing: -2px;
+
+    }
+
+    .project {
+
+        padding: 0 25px;
+
+    }
+
+    .projectHeader {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+    }
+
+    .projectHeader h3 {
+
+        letter-spacing: -2px;
+
+    }
+
+    .storyBlock {
+
+        padding: 70px 0;
+
+    }
+
+    .ending h3 {
+
+        letter-spacing: -2px;
+
+    }
+
+}
+
+/* ==================================
+        CHAPTER TRANSITION
+================================== */
+
+.chapterIntro {
+
+    animation: chapterFadeIn 1.2s ease both;
+
+}
+
+@keyframes chapterFadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}

@@ -1,0 +1,313 @@
+/* ===============================
+        HEADER
+=============================== */
+
+.header {
+
+    width: 100%;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 20px 0;
+
+}
+
+/* ===============================
+        NAVBAR
+=============================== */
+
+.navbar {
+
+    width: 90%;
+
+    max-width: 1300px;
+
+    height: 90px;
+
+    padding: 0 35px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: rgba(255, 255, 255, .75);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, .4);
+
+    border-radius: 24px;
+
+    box-shadow: var(--shadow);
+
+}
+
+/* ===============================
+        LOGO
+=============================== */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+.profile {
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid white;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+
+}
+
+.logoText {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.logoText h2 {
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: var(--text);
+
+}
+
+.logoText span {
+
+    font-size: 14px;
+
+    color: var(--text-light);
+
+}
+
+/* ===============================
+        NAVIGATION
+=============================== */
+
+.navLinks {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 40px;
+
+}
+
+.navLinks a {
+
+    font-weight: 600;
+
+    color: var(--text);
+
+    position: relative;
+
+}
+
+.navLinks a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -6px;
+
+    width: 0;
+
+    height: 2px;
+
+    background: var(--primary);
+
+    transition: var(--transition);
+
+}
+
+.navLinks a:hover {
+
+    color: var(--primary);
+
+}
+
+.navLinks a:hover::after {
+
+    width: 100%;
+
+}
+
+/* ===============================
+        ACTIONS
+=============================== */
+
+.actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+/* ===============================
+        THEME BUTTON
+=============================== */
+
+.themeButton {
+
+    width: 46px;
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background: white;
+
+    font-size: 18px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+
+}
+
+.themeButton:hover {
+
+    transform: scale(1.08);
+
+}
+
+/* ===============================
+        RESUME BUTTON
+=============================== */
+
+.resumeButton {
+
+    padding: 14px 28px;
+
+    background: var(--primary);
+
+    color: white;
+
+    border-radius: 14px;
+
+    font-weight: 600;
+
+}
+
+.resumeButton:hover {
+
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+
+}
+
+/* ==================================
+        NAVBAR SCROLL BEHAVIOR
+================================== */
+
+.header {
+
+    transition:
+        transform 0.6s ease,
+        opacity 0.6s ease;
+
+}
+
+.visible {
+
+    transform: translateY(0);
+
+    opacity: 1;
+
+}
+
+.hidden {
+
+    transform: translateY(-130%);
+
+    opacity: 0;
+
+}
+
+/* ==================================
+        MOBILE NAVBAR
+================================== */
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 12px 0;
+    }
+
+    .navbar {
+        width: 94%;
+        height: 70px;
+        padding: 0 18px;
+        border-radius: 18px;
+    }
+
+    .logoText h2 {
+        font-size: 1rem;
+    }
+
+    .logoText span {
+        font-size: 0.7rem;
+    }
+
+    .profile {
+        width: 42px;
+        height: 42px;
+    }
+
+    .navLinks {
+        display: none;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .themeButton {
+        width: 38px;
+        height: 38px;
+    }
+
+    .resumeButton {
+        padding: 9px 14px;
+        font-size: 0.8rem;
+    }
+
+}

@@ -1,0 +1,383 @@
+/* ==================================
+        CHAPTER FOUR
+================================== */
+
+.research {
+
+    width: 100%;
+
+    background: var(--surface);
+
+    padding-bottom: 180px;
+
+}
+
+/* ==================================
+        CHAPTER INTRO
+================================== */
+
+.chapterIntro {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 30px;
+
+}
+
+.chapterNumber {
+
+    color: var(--primary);
+
+    font-size: .85rem;
+
+    font-weight: 700;
+
+    letter-spacing: 7px;
+
+}
+
+.chapterTitle {
+
+    margin-top: 25px;
+
+    font-size: clamp(3rem, 7vw, 6rem);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    color: var(--text);
+
+}
+
+.introText {
+
+    max-width: 650px;
+
+    margin-top: 45px;
+
+    font-size: 1.25rem;
+
+    line-height: 1.9;
+
+    color: var(--text-light);
+
+}
+
+/* ==================================
+        DIRECTIONS
+================================== */
+
+.directions {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 80px 30px 160px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 0;
+
+}
+
+.direction {
+
+    min-height: 350px;
+
+    padding: 50px;
+
+    border-top: 1px solid rgba(0, 0, 0, .1);
+
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+}
+
+.direction+.direction {
+
+    border-left: 1px solid rgba(0, 0, 0, .1);
+
+}
+
+.number {
+
+    color: var(--primary);
+
+    font-size: .75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+}
+
+.direction h3 {
+
+    margin-top: 70px;
+
+    font-size: clamp(2rem, 3vw, 3rem);
+
+    letter-spacing: -1px;
+
+    color: var(--text);
+
+}
+
+.direction p {
+
+    margin-top: 20px;
+
+    max-width: 250px;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+
+    color: var(--text-light);
+
+}
+
+/* ==================================
+        QUESTIONS
+================================== */
+
+.questions {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 160px 30px;
+
+}
+
+.questionLabel {
+
+    color: var(--primary);
+
+    font-size: .75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+}
+
+.questionList {
+
+    margin-top: 70px;
+
+}
+
+.questionList p {
+
+    padding: 45px 0;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+
+    line-height: 1.4;
+
+    color: var(--text);
+
+}
+
+/* ==================================
+        ENDING
+================================== */
+
+.ending {
+
+    min-height: 70vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 30px;
+
+}
+
+.ending p {
+
+    font-size: 1.2rem;
+
+    color: var(--text-light);
+
+    margin-bottom: 30px;
+
+}
+
+.ending h3 {
+
+    font-size: clamp(2.8rem, 6vw, 5rem);
+
+    line-height: 1.05;
+
+    letter-spacing: -3px;
+
+    color: var(--text);
+
+}
+
+/* ==================================
+        RESPONSIVE
+================================== */
+
+@media (max-width:768px) {
+
+    .chapterTitle {
+
+        letter-spacing: -2px;
+
+    }
+
+    .directions {
+
+        grid-template-columns: 1fr;
+
+        padding: 60px 25px 100px;
+
+    }
+
+    .direction {
+
+        min-height: auto;
+
+        padding: 45px 20px;
+
+    }
+
+    .direction+.direction {
+
+        border-left: none;
+
+        border-top: none;
+
+    }
+
+    .direction h3 {
+
+        margin-top: 45px;
+
+    }
+
+    .questions {
+
+        padding: 100px 25px;
+
+    }
+
+    .questionList {
+
+        margin-top: 40px;
+
+    }
+
+    .questionList p {
+
+        padding: 35px 0;
+
+    }
+
+    .ending h3 {
+
+        letter-spacing: -2px;
+
+    }
+
+}
+
+/* ==================================
+        SLOW SCROLL REVEAL
+================================== */
+
+.reveal {
+
+    opacity: 0;
+
+    transform: translateY(80px);
+
+    transition:
+        opacity 1.6s ease,
+        transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.reveal.hidden {
+
+    opacity: 0;
+
+    transform: translateY(80px);
+
+}
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+/* Stagger */
+
+.reveal:nth-child(1).visible {
+
+    transition-delay: 0.1s;
+
+}
+
+.reveal:nth-child(2).visible {
+
+    transition-delay: 0.45s;
+
+}
+
+.reveal:nth-child(3).visible {
+
+    transition-delay: 0.8s;
+
+}
+
+/* ==================================
+        QUESTION REVEAL
+================================== */
+
+.questionReveal:nth-child(1).visible {
+
+    transition-delay: 0.1s;
+
+}
+
+.questionReveal:nth-child(2).visible {
+
+    transition-delay: 0.55s;
+
+}
+
+.questionReveal:nth-child(3).visible {
+
+    transition-delay: 1s;
+
+}
