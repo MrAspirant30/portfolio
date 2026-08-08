@@ -11,7 +11,7 @@ import Research from "@/components/Research/Research";
 import Contact from "@/components/Contact/Contact";
 
 /* ===============================
-        PAGE
+        PAGE 
 =============================== */
 
 export default function Home() {
