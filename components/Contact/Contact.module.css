@@ -8,9 +8,9 @@
 
     min-height: 100vh;
 
-    background: var(--text);
+    background: var(--contrast-background);
 
-    color: white;
+    color: var(--contrast-text);
 
     padding: 160px 30px 60px;
 
@@ -78,7 +78,7 @@
 
     margin-bottom: 15px;
 
-    color: rgba(255, 255, 255, .85);
+    color: color-mix(in srgb, var(--contrast-text) 84%, transparent);
 
 }
 
@@ -96,7 +96,7 @@
 
 .cta p {
 
-    color: rgba(255, 255, 255, .6);
+    color: color-mix(in srgb, var(--contrast-text) 64%, transparent);
 
     font-size: 1.05rem;
 
@@ -112,9 +112,9 @@
 
     border-radius: 50px;
 
-    background: white;
+    background: var(--contrast-text);
 
-    color: var(--text);
+    color: var(--contrast-background);
 
     font-weight: 700;
 
@@ -128,7 +128,7 @@
 
     transform: translateY(-5px);
 
-    box-shadow: 0 15px 35px rgba(255, 255, 255, .15);
+    box-shadow: 0 15px 35px color-mix(in srgb, var(--contrast-text) 16%, transparent);
 
 }
 
@@ -148,7 +148,7 @@
 
 .links a {
 
-    color: rgba(255, 255, 255, .65);
+    color: color-mix(in srgb, var(--contrast-text) 68%, transparent);
 
     text-decoration: none;
 
@@ -158,7 +158,7 @@
 
 .links a:hover {
 
-    color: white;
+    color: var(--contrast-text);
 
 }
 
@@ -176,7 +176,7 @@
 
     padding-top: 80px;
 
-    border-top: 1px solid rgba(255, 255, 255, .15);
+    border-top: 1px solid color-mix(in srgb, var(--contrast-text) 18%, transparent);
 
     text-align: center;
 
@@ -184,7 +184,7 @@
 
 .footerLine p {
 
-    color: rgba(255, 255, 255, .45);
+    color: color-mix(in srgb, var(--contrast-text) 48%, transparent);
 
     font-size: .9rem;
 

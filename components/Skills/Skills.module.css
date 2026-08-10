@@ -6,7 +6,7 @@
 
     width: 100%;
 
-    background: #f8fafc;
+    background: var(--background-elevated);
 
     padding-bottom: 160px;
 
@@ -92,7 +92,7 @@
 
     gap: 50px;
 
-    border-top: 1px solid rgba(0, 0, 0, .08);
+    border-top: 1px solid var(--border);
 
 }
 
@@ -158,9 +158,9 @@
 
     padding: 24px;
 
-    background: white;
+    background: var(--surface);
 
-    border: 1px solid rgba(0, 0, 0, .06);
+    border: 1px solid var(--border);
 
     border-radius: 18px;
 
@@ -172,7 +172,7 @@
 
     transform: translateY(-5px);
 
-    box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+    box-shadow: var(--shadow);
 
 }
 
@@ -196,7 +196,7 @@
 
     border-radius: 14px;
 
-    background: #eff6ff;
+    background: var(--accent-soft);
 
     color: var(--primary);
 

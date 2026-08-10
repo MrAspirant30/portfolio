@@ -1,306 +1,331 @@
 /* ==================================
-        CHAPTER ONE
+            JOURNEY
 ================================== */
 
-.chapter {
+.journey {
+    position: relative;
+    overflow: clip;
+    min-height: 430svh;
+    padding: 0 var(--space-page-x) 0 clamp(7rem, 13vw, 13rem);
+    background:
+        linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--surface-muted) 36%, transparent) 12%, transparent 100%),
+        var(--background);
+}
 
-    width: 100%;
+.journey::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 68px 68px;
+    mask-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .45) 18%, rgba(0, 0, 0, .25) 72%, transparent);
+    pointer-events: none;
+}
 
-    background: var(--background);
-
-    overflow: hidden;
-
+.journey::after {
+    content: "";
+    position: absolute;
+    inset: 16% -20% 18% 56%;
+    background: radial-gradient(ellipse at center, var(--accent-soft), transparent 48%);
+    filter: blur(26px);
+    opacity: .72;
+    pointer-events: none;
 }
 
 /* ==================================
-        CHAPTER INTRO
+            TIMELINE
 ================================== */
 
-.chapterIntro {
+.timeline {
+    position: sticky;
+    top: 14svh;
+    z-index: 2;
+    width: 4.2rem;
+    height: 72svh;
+    margin-left: calc((clamp(7rem, 13vw, 13rem) - var(--space-page-x)) * -1);
+    float: left;
+    display: grid;
+    place-items: center;
+}
 
-    min-height: 100vh;
+.timelineTrack {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--border);
+    transform: translateX(-50%);
+}
 
+.timelineProgress {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-line));
+    transform: scaleY(var(--journey-progress));
+    transform-origin: top;
+}
+
+.timelineNodes {
+    position: absolute;
+    inset: 0;
     display: flex;
-
     flex-direction: column;
-
+    justify-content: space-between;
     align-items: center;
+}
 
-    justify-content: center;
+.timelineNodes li {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--background);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    transition:
+        color var(--transition),
+        border-color var(--transition),
+        background-color var(--transition),
+        transform var(--transition);
+}
 
-    text-align: center;
+.timelineNodes li::before {
+    content: "";
+    position: absolute;
+    width: .46rem;
+    height: .46rem;
+    border-radius: 50%;
+    background: currentColor;
+    transform: translateY(1.4rem);
+    opacity: .28;
+}
 
-    padding: 120px 30px;
+.timelineNodes span {
+    font-family: var(--font-technical);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+}
 
+.timelineNodes .activeNode {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--background-elevated);
+    transform: scale(1.08);
+    box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+/* ==================================
+            CHAPTERS
+================================== */
+
+.chapterStack {
+    position: relative;
+    z-index: 1;
+}
+
+.chapter {
+    min-height: 86svh;
+    display: flex;
+    align-items: center;
+}
+
+.chapterInner {
+    max-width: 980px;
+    transform: translateY(30px);
+    opacity: 0;
+    transition:
+        opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.activeChapter .chapterInner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pastChapter .chapterInner {
+    opacity: 0;
+    transform: translateY(-40px);
+}
+
+.futureChapter .chapterInner {
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .chapterNumber {
+    display: inline-flex;
+    align-items: center;
+    gap: .85rem;
+    font-family: var(--font-technical);
+    font-size: clamp(4.8rem, 10vw, 9rem);
+    line-height: .78;
+    font-weight: 800;
+    letter-spacing: 0;
+    color: color-mix(in srgb, var(--text) 16%, transparent);
+}
 
-    font-size: .85rem;
-
-    font-weight: 700;
-
-    letter-spacing: 7px;
-
-    color: var(--primary);
-
+.chapterNumber::after {
+    content: "";
+    width: clamp(3rem, 8vw, 7rem);
+    height: 1px;
+    background: var(--accent);
+    opacity: .72;
 }
 
 .chapterTitle {
-
-    margin-top: 30px;
-
-    max-width: 900px;
-
-    font-size: clamp(3rem, 7vw, 6rem);
-
-    line-height: 1.02;
-
-    letter-spacing: -3px;
-
-    font-weight: 800;
-
-    color: var(--text);
-
-}
-
-/* ==================================
-        STORY
-================================== */
-
-.story {
-
-    max-width: 720px;
-
-    margin: 0 auto;
-
-    padding: 140px 30px;
-
-}
-
-.story p {
-
-    font-size: clamp(1.25rem, 2vw, 1.6rem);
-
-    line-height: 2;
-
-    color: var(--text-light);
-
-    margin-bottom: 45px;
-
-}
-
-.story .opening {
-
-    font-size: clamp(2rem, 4vw, 3.2rem);
-
-    line-height: 1.3;
-
-    color: var(--text);
-
-    font-weight: 600;
-
-}
-
-.shortLine {
-
-    margin-top: 100px;
-
-    color: var(--text) !important;
-
-    font-weight: 600;
-
-}
-
-/* ==================================
-        FEATURE QUOTE
-================================== */
-
-.quoteSection {
-
-    min-height: 80vh;
-
-    padding: 120px 30px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    background: var(--surface);
-
-}
-
-.quoteMark {
-
-    font-family: Georgia, serif;
-
-    font-size: 7rem;
-
-    line-height: .5;
-
-    color: var(--primary);
-
-    opacity: .35;
-
-}
-
-.quoteSection blockquote {
-
-    max-width: 1000px;
-
-    margin: 60px 0;
-
-    font-size: clamp(2.5rem, 5vw, 5rem);
-
-    line-height: 1.15;
-
-    letter-spacing: -2px;
-
-    font-weight: 700;
-
-    color: var(--text);
-
-}
-
-/* ==================================
-        EMPHASIS
-================================== */
-
-.emphasis {
-
-    font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
-
-    color: var(--text) !important;
-
-    font-weight: 700;
-
-}
-
-/* ==================================
-        ENDING
-================================== */
-
-.ending {
-
-    min-height: 80vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 120px 30px;
-
-}
-
-.ending h2 {
-
-    font-size: clamp(3.5rem, 7vw, 6rem);
-
+    margin-top: clamp(1.2rem, 2.4vw, 2rem);
+    font-size: clamp(.82rem, 1.4vw, 1rem);
     line-height: 1;
-
-    letter-spacing: -3px;
-
-    color: var(--text);
-
+    font-family: var(--font-technical);
+    font-weight: 800;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--accent);
 }
 
-.ending p {
+.chapterLine {
+    display: grid;
+    margin-top: clamp(1rem, 2.6vw, 2rem);
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 8vw, 8rem);
+    line-height: .98;
+    color: var(--text);
+}
 
-    margin-top: 35px;
-
-    font-size: 1.2rem;
-
-    color: var(--text-light);
-
+.chapterLine span {
+    display: block;
 }
 
 /* ==================================
-        RESPONSIVE
+            RESPONSIVE
 ================================== */
 
-@media (max-width:768px) {
+@media (max-width: 1024px) {
+
+    .journey {
+        padding-left: clamp(6rem, 12vw, 9rem);
+    }
+
+    .timeline {
+        margin-left: calc((clamp(6rem, 12vw, 9rem) - var(--space-page-x)) * -1);
+    }
+
+    .chapter {
+        min-height: 82svh;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .journey {
+        min-height: 410svh;
+        padding: 0 1.25rem;
+    }
+
+    .journey::before {
+        background-size: 48px 48px;
+    }
+
+    .journey::after {
+        inset: 20% -55% 30% 30%;
+        opacity: .55;
+    }
+
+    .timeline {
+        top: 4.35rem;
+        width: 100%;
+        height: 4.6rem;
+        margin: 0;
+        padding: 0 1.25rem;
+        float: none;
+        background:
+            linear-gradient(to bottom, var(--background), color-mix(in srgb, var(--background) 88%, transparent));
+        backdrop-filter: blur(12px);
+    }
+
+    .timelineTrack {
+        top: 50%;
+        right: 1.25rem;
+        bottom: auto;
+        left: 1.25rem;
+        width: auto;
+        height: 1px;
+        transform: translateY(-50%);
+    }
+
+    .timelineProgress {
+        width: 100%;
+        height: 1px;
+        transform: scaleX(var(--journey-progress));
+        transform-origin: left;
+    }
+
+    .timelineNodes {
+        flex-direction: row;
+        padding: 0 1.25rem;
+    }
+
+    .timelineNodes li {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .timelineNodes li::before {
+        display: none;
+    }
+
+    .timelineNodes span {
+        font-size: .64rem;
+    }
+
+    .chapter {
+        min-height: 82svh;
+        align-items: center;
+        padding-top: 4.6rem;
+    }
+
+    .chapterInner {
+        max-width: 100%;
+    }
+
+    .chapterNumber {
+        font-size: clamp(3.8rem, 22vw, 6.4rem);
+    }
 
     .chapterTitle {
-
-        letter-spacing: -2px;
-
+        letter-spacing: .22em;
     }
 
-    .story {
-
-        padding: 100px 25px;
-
-    }
-
-    .quoteSection {
-
-        min-height: 70vh;
-
-        padding: 100px 20px;
-
-    }
-
-    .quoteSection blockquote {
-
-        letter-spacing: -1px;
-
-    }
-
-    .ending {
-
-        min-height: 70vh;
-
-    }
-
-    .ending h2 {
-
-        letter-spacing: -2px;
-
+    .chapterLine {
+        font-size: clamp(3.05rem, 15vw, 5.5rem);
+        line-height: 1.02;
     }
 
 }
 
-/* ==================================
-        CHAPTER TRANSITION
-================================== */
+@media (prefers-reduced-motion: reduce) {
 
-.chapterIntro,
-.story,
-.quoteSection,
-.ending {
-
-    animation: chapterFadeIn 1.2s ease both;
-
-}
-
-@keyframes chapterFadeIn {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(30px);
-
-    }
-
-    to {
-
+    .chapterInner,
+    .activeChapter .chapterInner,
+    .pastChapter .chapterInner,
+    .futureChapter .chapterInner {
         opacity: 1;
+        transform: none;
+        transition: none;
+    }
 
-        transform: translateY(0);
-
+    .timelineProgress {
+        transition: none;
     }
 
 }

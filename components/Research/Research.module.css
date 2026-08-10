@@ -100,15 +100,15 @@
 
     padding: 50px;
 
-    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-top: 1px solid var(--border);
 
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid var(--border);
 
 }
 
 .direction+.direction {
 
-    border-left: 1px solid rgba(0, 0, 0, .1);
+    border-left: 1px solid var(--border);
 
 }
 
@@ -186,7 +186,7 @@
 
     padding: 45px 0;
 
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid var(--border);
 
     font-size: clamp(1.5rem, 3vw, 2.5rem);
 

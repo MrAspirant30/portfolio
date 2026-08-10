@@ -19,6 +19,7 @@
     justify-content: center;
 
     padding: 20px 0;
+    pointer-events: none;
 
 }
 
@@ -42,17 +43,18 @@
 
     align-items: center;
 
-    background: rgba(255, 255, 255, .75);
+    background: var(--surface-glass);
 
     backdrop-filter: blur(18px);
 
     -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255, 255, 255, .4);
+    border: 1px solid var(--border);
 
-    border-radius: 24px;
+    border-radius: var(--radius-lg);
 
     box-shadow: var(--shadow);
+    pointer-events: auto;
 
 }
 
@@ -76,9 +78,9 @@
 
     object-fit: cover;
 
-    border: 2px solid white;
+    border: 2px solid var(--surface);
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    box-shadow: var(--shadow-soft);
 
 }
 
@@ -105,6 +107,9 @@
     font-size: 14px;
 
     color: var(--text-light);
+    font-family: var(--font-technical);
+    letter-spacing: .08em;
+    text-transform: uppercase;
 
 }
 
@@ -118,7 +123,7 @@
 
     align-items: center;
 
-    gap: 40px;
+    gap: clamp(18px, 2.5vw, 40px);
 
 }
 
@@ -129,6 +134,7 @@
     color: var(--text);
 
     position: relative;
+    font-size: .95rem;
 
 }
 
@@ -146,7 +152,7 @@
 
     height: 2px;
 
-    background: var(--primary);
+    background: var(--accent);
 
     transition: var(--transition);
 
@@ -174,7 +180,7 @@
 
     align-items: center;
 
-    gap: 18px;
+    gap: 12px;
 
 }
 
@@ -184,21 +190,26 @@
 
 .themeButton {
 
-    width: 46px;
+    min-width: 66px;
 
     height: 46px;
 
-    border: none;
+    border: 1px solid var(--border);
 
-    border-radius: 50%;
+    border-radius: var(--radius-pill);
 
     cursor: pointer;
 
-    background: white;
+    background: var(--surface);
+    color: var(--text);
 
-    font-size: 18px;
+    font-family: var(--font-technical);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    box-shadow: var(--shadow-soft);
 
 }
 
@@ -218,9 +229,9 @@
 
     background: var(--primary);
 
-    color: white;
+    color: var(--text-inverse);
 
-    border-radius: 14px;
+    border-radius: var(--radius-md);
 
     font-weight: 600;
 
@@ -231,6 +242,16 @@
     background: var(--primary-hover);
 
     transform: translateY(-2px);
+
+}
+
+.themeButton:focus-visible,
+.resumeButton:focus-visible,
+.logo:focus-visible,
+.navLinks a:focus-visible {
+
+    outline: 3px solid var(--accent-line);
+    outline-offset: 5px;
 
 }
 
@@ -276,7 +297,7 @@
         width: 94%;
         height: 70px;
         padding: 0 18px;
-        border-radius: 18px;
+        border-radius: var(--radius-md);
     }
 
     .logoText h2 {
@@ -301,8 +322,9 @@
     }
 
     .themeButton {
-        width: 38px;
+        min-width: 54px;
         height: 38px;
+        font-size: .65rem;
     }
 
     .resumeButton {

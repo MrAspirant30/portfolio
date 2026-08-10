@@ -1,8 +1,47 @@
+"use client";
+
 /* ===============================
         IMPORTS
 =============================== */
 
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import styles from "./About.module.css";
+
+type JourneyStyle = CSSProperties & {
+    "--journey-progress": string;
+};
+
+const chapters = [
+    {
+        number: "01",
+        title: "Purpose",
+        lines: ["Where curiosity", "became direction."],
+    },
+    {
+        number: "02",
+        title: "Build",
+        lines: ["Where ideas", "started taking form."],
+    },
+    {
+        number: "03",
+        title: "Explore",
+        lines: ["Where questions", "opened new paths."],
+    },
+    {
+        number: "04",
+        title: "Create",
+        lines: ["Where learning", "became something real."],
+    },
+    {
+        number: "05",
+        title: "Next",
+        lines: ["Where the story", "keeps moving."],
+    },
+];
+
+const clamp = (value: number, min: number, max: number) =>
+    Math.min(Math.max(value, min), max);
 
 /* ===============================
         COMPONENT
@@ -10,148 +49,166 @@ import styles from "./About.module.css";
 
 export default function About() {
 
+    const journeyRef = useRef<HTMLElement | null>(null);
+    const chapterRefs = useRef<Array<HTMLElement | null>>([]);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    useEffect(() => {
+
+        const journey = journeyRef.current;
+
+        if (!journey) {
+            return;
+        }
+
+        let frame = 0;
+
+        const updateJourney = () => {
+
+            frame = 0;
+
+            const rect = journey.getBoundingClientRect();
+            const viewportHeight = window.innerHeight || 1;
+            const progressStart = viewportHeight * .48;
+            const progressEnd = rect.height - viewportHeight * .72;
+            const progress = clamp((-rect.top + progressStart) / Math.max(progressEnd, 1), 0, 1);
+
+            journey.style.setProperty("--journey-progress", `${progress}`);
+
+            let nextActive = 0;
+            let nearestDistance = Number.POSITIVE_INFINITY;
+            const viewportCenter = viewportHeight * .5;
+
+            chapterRefs.current.forEach((chapter, index) => {
+
+                if (!chapter) {
+                    return;
+                }
+
+                const chapterRect = chapter.getBoundingClientRect();
+                const chapterCenter = chapterRect.top + chapterRect.height * .5;
+                const distance = Math.abs(chapterCenter - viewportCenter);
+
+                if (distance < nearestDistance) {
+                    nearestDistance = distance;
+                    nextActive = index;
+                }
+
+            });
+
+            setActiveIndex((current) => current === nextActive ? current : nextActive);
+
+        };
+
+        const requestUpdate = () => {
+
+            if (frame) {
+                return;
+            }
+
+            frame = window.requestAnimationFrame(updateJourney);
+
+        };
+
+        updateJourney();
+
+        window.addEventListener("scroll", requestUpdate, {
+            passive: true,
+        });
+        window.addEventListener("resize", requestUpdate);
+
+        return () => {
+
+            if (frame) {
+                window.cancelAnimationFrame(frame);
+            }
+
+            window.removeEventListener("scroll", requestUpdate);
+            window.removeEventListener("resize", requestUpdate);
+
+        };
+
+    }, []);
+
+    const journeyStyle: JourneyStyle = {
+        "--journey-progress": "0",
+    };
+
     return (
 
-        <section id="journey" className={styles.chapter}>
+        <section
+            id="journey"
+            ref={journeyRef}
+            className={styles.journey}
+            style={journeyStyle}
+            aria-labelledby="journey-title"
+        >
 
-            {/* ===============================
-                    CHAPTER INTRO
-            =============================== */}
+            <div className={styles.timeline} aria-hidden="true">
 
-            <div className={styles.chapterIntro}>
+                <div className={styles.timelineTrack}>
+                    <span className={styles.timelineProgress}></span>
+                </div>
 
-                <span className={styles.chapterNumber}>
-                    CHAPTER ONE
-                </span>
-
-                <h2 className={styles.chapterTitle}>
-                    Where Curiosity
-                    <br />
-                    Became Purpose
-                </h2>
-
-            </div>
-
-            {/* ===============================
-                    OPENING
-            =============================== */}
-
-            <div className={styles.story}>
-
-                <p className={styles.opening}>
-                    Every journey starts with a question.
-                </p>
-
-                <p className={styles.shortLine}>
-                    Mine was simple.
-                </p>
+                <ol className={styles.timelineNodes}>
+                    {chapters.map((chapter, index) => (
+                        <li
+                            key={chapter.number}
+                            className={index === activeIndex ? styles.activeNode : undefined}
+                        >
+                            <span>{chapter.number}</span>
+                        </li>
+                    ))}
+                </ol>
 
             </div>
 
-            {/* ===============================
-                    FEATURE QUOTE
-            =============================== */}
+            <div className={styles.chapterStack}>
 
-            <div className={styles.quoteSection}>
+                {chapters.map((chapter, index) => {
 
-                <span className={styles.quoteMark}>
-                    &ldquo;
-                </span>
+                    const stateClass = index === activeIndex
+                        ? styles.activeChapter
+                        : index < activeIndex
+                            ? styles.pastChapter
+                            : styles.futureChapter;
 
-                <blockquote>
-                    What if technology could solve
-                    <br />
-                    problems that truly matter?
-                </blockquote>
+                    return (
 
-                <span className={styles.quoteMark}>
-                    &rdquo;
-                </span>
+                        <article
+                            key={chapter.number}
+                            ref={(element) => {
+                                chapterRefs.current[index] = element;
+                            }}
+                            className={`${styles.chapter} ${stateClass}`}
+                            aria-labelledby={index === 0 ? "journey-title" : undefined}
+                        >
 
-            </div>
+                            <div className={styles.chapterInner}>
 
-            {/* ===============================
-                    STORY CONTINUES
-            =============================== */}
+                                <span className={styles.chapterNumber}>
+                                    {chapter.number}
+                                </span>
 
-            <div className={styles.story}>
+                                <h2
+                                    id={index === 0 ? "journey-title" : undefined}
+                                    className={styles.chapterTitle}
+                                >
+                                    {chapter.title}
+                                </h2>
 
-                <p>
-                    One question became curiosity.
-                </p>
+                                <p className={styles.chapterLine}>
+                                    <span>{chapter.lines[0]}</span>
+                                    <span>{chapter.lines[1]}</span>
+                                </p>
 
-                <p>
-                    Curiosity became learning.
-                </p>
+                            </div>
 
-                <p>
-                    Learning became purpose.
-                </p>
+                        </article>
 
-                <p>
-                    Purpose became direction.
-                </p>
+                    );
 
-            </div>
-
-            {/* ===============================
-                    SECOND PART
-            =============================== */}
-
-            <div className={styles.story}>
-
-                <p>
-                    Choosing Computer Science was never
-                    simply about earning a degree.
-                </p>
-
-                <p>
-                    It was about gaining the ability
-                    to build, experiment, and solve.
-                </p>
-
-                <p>
-                    That curiosity slowly led me toward
-                    Artificial Intelligence.
-                </p>
-
-                <p>
-                    Then came research.
-                </p>
-
-                <p>
-                    Then entrepreneurship.
-                </p>
-
-                <p>
-                    Different paths.
-                </p>
-
-                <p className={styles.emphasis}>
-                    One destination.
-                </p>
-
-                <p className={styles.emphasis}>
-                    Solving meaningful real-world problems.
-                </p>
-
-            </div>
-
-            {/* ===============================
-                    CLOSING
-            =============================== */}
-
-            <div className={styles.ending}>
-
-                <h2>
-                    This is only
-                    <br />
-                    Chapter One.
-                </h2>
-
-                <p>
-                    The story is still being written.
-                </p>
+                })}
 
             </div>
 

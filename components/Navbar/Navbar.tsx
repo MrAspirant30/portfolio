@@ -8,6 +8,22 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 
+type Theme = "light" | "dark";
+
+const getSystemTheme = (): Theme =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+const getStoredTheme = (): Theme | null => {
+    const storedTheme = window.localStorage.getItem("theme");
+
+    return storedTheme === "light" || storedTheme === "dark" ? storedTheme : null;
+};
+
+const applyTheme = (theme: Theme) => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+};
+
 /* ===============================
         COMPONENT
 =============================== */
@@ -15,6 +31,13 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
 
     const [showHeader, setShowHeader] = useState(true);
+    const [theme, setTheme] = useState<Theme>(() => {
+        if (typeof document === "undefined") {
+            return "light";
+        }
+
+        return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    });
 
     useEffect(() => {
 
@@ -53,6 +76,38 @@ export default function Navbar() {
         };
 
     }, []);
+
+    useEffect(() => {
+
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const handleSystemThemeChange = () => {
+            if (getStoredTheme()) {
+                return;
+            }
+
+            const nextTheme = getSystemTheme();
+            setTheme(nextTheme);
+            applyTheme(nextTheme);
+        };
+
+        mediaQuery.addEventListener("change", handleSystemThemeChange);
+
+        return () => {
+            mediaQuery.removeEventListener("change", handleSystemThemeChange);
+        };
+
+    }, []);
+
+    const handleThemeToggle = () => {
+
+        const nextTheme = theme === "dark" ? "light" : "dark";
+
+        window.localStorage.setItem("theme", nextTheme);
+        setTheme(nextTheme);
+        applyTheme(nextTheme);
+
+    };
 
     return (
 
@@ -138,10 +193,14 @@ export default function Navbar() {
                 <div className={styles.actions}>
 
                     <button
+                        type="button"
                         className={styles.themeButton}
-                        aria-label="Toggle theme"
+                        aria-label="Toggle color theme"
+                        onClick={handleThemeToggle}
                     >
-                        🌙
+                        <span aria-hidden="true">
+                            Theme
+                        </span>
                     </button>
 
                     <a
