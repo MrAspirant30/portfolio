@@ -125,7 +125,7 @@ export default function Navbar() {
                 <a href="#home" className={styles.logo}>
 
                     <Image
-                        src="/images/profile.png"
+                        src="/images/profile.jpg"
                         alt="Jyotiprasad"
                         width={52}
                         height={52}

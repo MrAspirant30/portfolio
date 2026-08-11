@@ -1,329 +1,222 @@
-/* ==================================
-        CHAPTER TWO
-================================== */
+/* ===============================
+        SKILLS ECOSYSTEM
+=============================== */
 
 .skills {
+    --line-color: var(--border);
+    --node-size: 100px;
+    --center-node-size: 120px;
+    --gap: 1.5rem;
+    --line-width: 1px;
+    position: relative;
+    padding: var(--space-section-y) 0;
+    overflow: hidden;
+}
 
+.title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: normal;
+}
+
+.ecosystem {
+    display: grid;
+    grid-template-columns: 1fr var(--center-node-size) 1fr;
+    grid-template-rows: repeat(3, auto);
+    align-items: center;
+    justify-items: center;
+    gap: var(--gap);
     width: 100%;
-
-    background: var(--background-elevated);
-
-    padding-bottom: 160px;
-
-}
-
-/* ==================================
-        CHAPTER INTRO
-================================== */
-
-.chapterIntro {
-
-    min-height: 100vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 120px 30px;
-
-}
-
-.chapterNumber {
-
-    color: var(--primary);
-
-    font-size: .85rem;
-
-    font-weight: 700;
-
-    letter-spacing: 7px;
-
-}
-
-.chapterTitle {
-
-    margin-top: 25px;
-
-    font-size: clamp(3rem, 7vw, 6rem);
-
-    line-height: 1;
-
-    letter-spacing: -3px;
-
-    color: var(--text);
-
-}
-
-.introText {
-
-    max-width: 650px;
-
-    margin-top: 40px;
-
-    font-size: 1.25rem;
-
-    line-height: 1.9;
-
-    color: var(--text-light);
-
-}
-
-/* ==================================
-        SECTION
-================================== */
-
-.section {
-
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding: 120px 30px;
-
-    display: grid;
-
-    grid-template-columns: 100px 1fr;
-
-    gap: 50px;
-
-    border-top: 1px solid var(--border);
-
-}
-
-.sectionNumber {
-
-    font-size: .85rem;
-
-    font-weight: 700;
-
-    letter-spacing: 3px;
-
-    color: var(--primary);
-
-    padding-top: 8px;
-
-}
-
-.sectionContent h3 {
-
-    font-size: 2.5rem;
-
-    color: var(--text);
-
-    margin-bottom: 15px;
-
-}
-
-.sectionContent>p {
-
-    max-width: 650px;
-
-    color: var(--text-light);
-
-    font-size: 1.1rem;
-
-    line-height: 1.8;
-
-    margin-bottom: 40px;
-
-}
-
-/* ==================================
-        CARDS
-================================== */
-
-.cards {
-
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 18px;
-
-}
-
-.card {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    padding: 24px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: 18px;
-
-    transition: .3s ease;
-
-}
-
-.card:hover {
-
-    transform: translateY(-5px);
-
-    box-shadow: var(--shadow);
-
-}
-
-/* ==================================
-        CARD ICON
-================================== */
-
-.cardIcon {
-
-    width: 52px;
-
-    height: 52px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 14px;
-
-    background: var(--accent-soft);
-
-    color: var(--primary);
-
-    font-weight: 800;
-
-    font-size: 1rem;
-
-}
-
-/* ==================================
-        CARD TEXT
-================================== */
-
-.card h4 {
-
-    font-size: 1.1rem;
-
-    color: var(--text);
-
-    margin-bottom: 5px;
-
-}
-
-.card p {
-
-    color: var(--text-light);
-
-    font-size: .9rem;
-
-}
-
-/* ==================================
-        ENDING
-================================== */
-
-.ending {
-
     max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    font-family: var(--font-technical);
+}
 
-    margin: 80px auto 0;
-
-    padding: 120px 30px;
-
+.node {
+    width: var(--node-size);
+    height: var(--node-size);
+    border-radius: 50%;
+    border: var(--line-width) solid var(--line-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+    z-index: 2;
+    background-color: var(--background-elevated);
+    font-size: 0.9rem;
+    padding: 0.5rem;
 }
 
-.ending p {
-
-    font-size: 1.8rem;
-
-    line-height: 1.5;
-
-    font-weight: 600;
-
-    color: var(--text);
-
+.centerNode {
+    grid-column: 2;
+    grid-row: 2;
+    width: var(--center-node-size);
+    height: var(--center-node-size);
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-width: 2px;
+    z-index: 3;
 }
 
-/* ==================================
-        RESPONSIVE
-================================== */
+.node:hover,
+.node.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-soft);
+}
 
-@media (max-width:768px) {
+.techList {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--surface-glass);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+    z-index: 4;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    padding: 1rem;
+}
 
-    .chapterIntro {
+.node.active .techList {
+    opacity: 1;
+    visibility: visible;
+}
 
-        min-height: 100vh;
+.techList span {
+    display: block;
+}
 
-    }
+.node .mainSkill {
+    transition: opacity var(--transition-fast);
+}
 
-    .chapterTitle {
+.node.active .mainSkill {
+    opacity: 0;
+}
 
-        letter-spacing: -2px;
 
-    }
+/* Specific node positions */
+.ai { grid-column: 2; grid-row: 1; }
+.research { grid-column: 1; grid-row: 2; }
+.web { grid-column: 3; grid-row: 2; }
+.python { grid-column: 2; grid-row: 3; }
+.tools { 
+    grid-column: 1; 
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+    margin-left: 10%;
+}
 
-    .section {
+/* Connecting Lines */
+.ecosystem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        /* AI to BUILD */
+        linear-gradient(to bottom, var(--line-color) 50%, transparent 50%),
+        /* RESEARCH to BUILD */
+        linear-gradient(to right, var(--line-color) 50%, transparent 50%),
+        /* WEB to BUILD */
+        linear-gradient(to left, var(--line-color) 50%, transparent 50%),
+        /* PYTHON to BUILD */
+        linear-gradient(to top, var(--line-color) 50%, transparent 50%);
 
+    background-size: 
+        var(--line-width) calc(var(--node-size) + var(--gap)),
+        calc(var(--node-size) + var(--gap)) var(--line-width),
+        calc(var(--node-size) + var(--gap)) var(--line-width),
+        var(--line-width) calc(var(--node-size) + var(--gap));
+
+    background-repeat: no-repeat;
+    background-position: 
+        center calc(50% - (var(--node-size) + var(--gap)) / 2),
+        calc(50% - (var(--node-size) + var(--gap)) / 2) center,
+        calc(50% + (var(--node-size) + var(--gap)) / 2) center,
+        center calc(50% + (var(--node-size) + var(--gap)) / 2);
+    z-index: 1;
+}
+
+/* Line from TOOLS to BUILD */
+.tools::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%; 
+    height: var(--line-width);
+    background: var(--line-color);
+    transform-origin: top left;
+    transform: rotate(45deg) translate(10px, -20px);
+    z-index: -1;
+}
+
+
+/* ===============================
+        RESPONSIVENESS
+=============================== */
+
+@media (max-width: 768px) {
+    .ecosystem {
         grid-template-columns: 1fr;
-
-        gap: 20px;
-
-        padding: 90px 25px;
-
+        grid-template-rows: repeat(5, auto);
+        gap: 2rem;
+        max-width: 300px; /* Adjust for single column */
     }
 
-    .cards {
+    .node, .centerNode {
+        grid-column: 1;
+        width: 120px;
+        height: 120px;
+    }
+    
+    .ai { grid-row: 1; }
+    .research { grid-row: 2; }
+    .centerNode { grid-row: 3; } /* BUILD */
+    .web { grid-row: 4; }
+    .python { grid-row: 5; }
 
-        grid-template-columns: 1fr;
-
+    .tools {
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+        margin-left: -50%;
+        margin-top: -20%;
+        width: 80px;
+        height: 80px;
+        font-size: 0.8rem;
     }
 
-    .ending {
-
-        padding: 90px 25px;
-
+    .ecosystem::before {
+        /* Vertical lines between all nodes */
+        background-image: linear-gradient(to bottom, var(--line-color) 100%, transparent 0);
+        background-size: var(--line-width) 100%;
+        background-position: center;
     }
 
-}
-
-/* ==================================
-        CHAPTER TRANSITION
-================================== */
-
-.chapterIntro {
-
-    animation: chapterFadeIn 1.2s ease both;
-
-}
-
-@keyframes chapterFadeIn {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(30px);
-
+    .tools::after {
+        display: none; /* Hide diagonal line on mobile */
     }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
 }
